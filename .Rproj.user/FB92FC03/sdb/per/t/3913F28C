@@ -1,0 +1,17 @@
+{
+    "contents" : "\n# load library\nif ( !require(\"sqldf\") ) {\n    install.packages(\"sqldf\")\n}\nlibrary(sqldf)\n\n# read data\ncolClass <- c(rep(\"character\",2), rep(\"numeric\",7))\nsqlText <- \"SELECT * FROM file WHERE Date in ( '1/2/2007', '2/2/2007' )\"\nconsum <- read.csv.sql(file=\"household_power_consumption.txt\", sql=sqlText, sep=\";\",\n                       header=TRUE, colClasses=colClass)\n\n# get date and time data\nSys.setlocale(\"LC_TIME\",\"english\")\ndateTime <- paste(consum$Date, consum$Time)\nconsum$dateTime <- strptime(dateTime, format=\"%d/%m/%Y %H:%M:%S\")\n\n# open device\npng(filename=\"plot4.PNG\", width=480, height=480, units=\"px\")\n\n# plot data\npar(mfrow=c(2,2))\n# No. 1\nwith(consum, {\n    plot(dateTime, Global_active_power, xlab=\"\",\n         ylab=\"Global Active Power\", type=\"l\")\n})\n\n# No. 2\nwith(consum, {\n    plot(dateTime, Voltage, xlab=\"datetime\", ylab=\"Voltage\", type=\"l\")\n})\n\n# NO. 3\nwith(consum, { \n    plot(dateTime, Sub_metering_1, xlab=\"\", ylab=\"Energy sub metering\",\n         type=\"l\", col=\"black\")\n    lines(dateTime, Sub_metering_2, type=\"l\", col=\"red\")\n    lines(dateTime, Sub_metering_3, type=\"l\", col=\"blue\")\n    legend(\"topright\", lty=1, bty=\"n\", cex=0.75,\n           col=c(\"black\", \"red\", \"blue\"), \n           legend=c(\"Sub_metering_1\", \"Sub_metering_2\", \"Sub_metering_3\"))\n})\n\n# NO. 4\nwith(consum, {\n    plot(dateTime, Global_reactive_power, xlab=\"datetime\", \n         ylab=\"Global_reactive_power\", type=\"l\")\n})\n\n#close device\ndev.off()",
+    "created" : 1420935042406.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "785700865",
+    "id" : "3913F28C",
+    "lastKnownWriteTime" : 1420963647,
+    "path" : "D:/devtool/git_workspace/ExploratoryDataAnalysis/ExData_Plotting1/plot4.R",
+    "project_path" : "plot4.R",
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "source_on_save" : false,
+    "type" : "r_source"
+}

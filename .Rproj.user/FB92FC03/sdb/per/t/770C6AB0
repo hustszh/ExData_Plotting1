@@ -1,0 +1,17 @@
+{
+    "contents" : "\n# read data\ncolClass <- c(rep(\"character\",2), rep(\"numeric\",7))\n\nconsum <- read.csv(\"household_power_consumption.txt\",sep=\";\",\n                   na.strings=\"?\",header=TRUE,colClasses=colClass)\n\n# get subset data\nplot_data <- subset(consum, consum$Date == \"1/2/2007\" | consum$Date == \"2/2/2007\")\n\n# open device\npng(filename=\"plot1.PNG\", width=480, height=480, units=\"px\")\n\n# plot data\nhist(consum$Global_active_power, main=\"Global Acitve Power\",\n     xlab=\"Global Active Power(kilowatts)\", col=\"red\")\n\n#close device\ndev.off()\n",
+    "created" : 1420963195120.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "43690838",
+    "id" : "770C6AB0",
+    "lastKnownWriteTime" : 1420959292,
+    "path" : "D:/devtool/git_workspace/ExploratoryDataAnalysis/ExData_Plotting1/plot1.R",
+    "project_path" : "plot1.R",
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "source_on_save" : false,
+    "type" : "r_source"
+}

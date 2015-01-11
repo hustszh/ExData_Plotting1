@@ -1,0 +1,17 @@
+{
+    "contents" : "\n# load library\nif ( !require(\"sqldf\") ) {\n    install.packages(\"sqldf\")\n}\nlibrary(sqldf)\n\n# read data\ncolClass <- c(rep(\"character\",2), rep(\"numeric\",7))\nsqlText <- \"SELECT * FROM file WHERE Date in ( '1/2/2007', '2/2/2007' )\"\nconsum <- read.csv.sql(file=\"household_power_consumption.txt\", sql=sqlText, sep=\";\",\n                       header=TRUE, colClasses=colClass)\n\n# get date and time data\nSys.setlocale(\"LC_TIME\",\"english\")\ndateTime <- paste(consum$Date, consum$Time)\nconsum$dateTime <- strptime(dateTime, format=\"%d/%m/%Y %H:%M:%S\")\n\n# open device\npng(filename=\"plot2.PNG\", width=480, height=480, units=\"px\")\n\n# plot data\nplot(consum$dateTime, consum$Global_active_power, xlab=\"\",\n     ylab=\"Global Active Power(kilowatts)\", type=\"l\")\n\n# close\ndev.off()",
+    "created" : 1420962499467.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "756247728",
+    "id" : "C606883D",
+    "lastKnownWriteTime" : 1420963804,
+    "path" : "D:/devtool/git_workspace/ExploratoryDataAnalysis/ExData_Plotting1/plot2.R",
+    "project_path" : "plot2.R",
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "source_on_save" : false,
+    "type" : "r_source"
+}
